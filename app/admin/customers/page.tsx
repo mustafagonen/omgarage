@@ -5,6 +5,10 @@ import { useCustomers } from '@/hooks/useCustomers';
 import { CustomerFormData, SERVICE_OPTIONS } from '@/lib/types';
 import styles from './customers.module.css';
 
+// Force dynamic rendering to prevent build-time Firebase errors
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function CustomersPage() {
     const { customers, loading, addCustomer, updateCustomer, deleteCustomer } = useCustomers();
     const [showForm, setShowForm] = useState(false);

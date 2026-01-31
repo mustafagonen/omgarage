@@ -3,6 +3,10 @@
 import { useCustomers } from '@/hooks/useCustomers';
 import styles from './dashboard.module.css';
 
+// Force dynamic rendering to prevent build-time Firebase errors
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function AdminDashboard() {
     const { customers, loading } = useCustomers();
 
