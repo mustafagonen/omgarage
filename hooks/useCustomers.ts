@@ -22,6 +22,11 @@ export function useCustomers() {
 
     // Subscribe to customers collection
     useEffect(() => {
+        if (!db) {
+            setLoading(false);
+            return;
+        }
+
         const q = query(collection(db, 'customers'), orderBy('createdAt', 'desc'));
 
         const unsubscribe = onSnapshot(
@@ -47,9 +52,10 @@ export function useCustomers() {
 
     // Add new customer
     const addCustomer = async (data: CustomerFormData) => {
+        if (!db) throw new Error('Database not initialized');
         try {
             const now = Timestamp.now();
-            await addDoc(collection(db, 'customers'), {
+            await addDoc(collection(db!, 'customers'), {
                 ...data,
                 receivedDate: Timestamp.fromDate(data.receivedDate),
                 deliveryDate: Timestamp.fromDate(data.deliveryDate),
@@ -64,8 +70,9 @@ export function useCustomers() {
 
     // Update customer
     const updateCustomer = async (id: string, data: Partial<CustomerFormData>) => {
+        if (!db) throw new Error('Database not initialized');
         try {
-            const customerRef = doc(db, 'customers', id);
+            const customerRef = doc(db!, 'customers', id);
             const updateData: any = {
                 ...data,
                 updatedAt: Timestamp.now(),
@@ -87,8 +94,9 @@ export function useCustomers() {
 
     // Delete customer
     const deleteCustomer = async (id: string) => {
+        if (!db) throw new Error('Database not initialized');
         try {
-            await deleteDoc(doc(db, 'customers', id));
+            await deleteDoc(doc(db!, 'customers', id));
         } catch (err: any) {
             console.error('Error deleting customer:', err);
             throw new Error(err.message);

@@ -4,10 +4,6 @@ import { useCustomers } from '@/hooks/useCustomers';
 import { useState } from 'react';
 import styles from './calendar.module.css';
 
-// Force dynamic rendering to prevent build-time Firebase errors
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 
 export default function CalendarPage() {
     const { customers, loading } = useCustomers();
