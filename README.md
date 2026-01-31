@@ -2,36 +2,38 @@
 
 Modern bir garaj yönetim sistemi - Next.js, TypeScript ve Firebase ile geliştirilmiştir.
 
-## 🚀 Netlify Deployment
+## 🚀 Firebase Hosting Deployment
 
-### Environment Variables Ayarları
+### Hızlı Başlangıç
 
-Netlify dashboard'unuzda aşağıdaki environment variables'ları eklemeniz gerekmektedir:
+```bash
+# Firebase CLI yükleyin
+npm install -g firebase-tools
 
-1. Netlify dashboard'a gidin: https://app.netlify.com
-2. Site Settings > Environment Variables bölümüne gidin
-3. Aşağıdaki değişkenleri ekleyin:
+# Firebase'e giriş yapın
+firebase login
 
+# Hosting'i başlatın
+firebase init hosting
+
+# Deploy edin
+npm run deploy
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key-here
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
-NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+
+Detaylı deployment talimatları için [DEPLOYMENT.md](DEPLOYMENT.md) dosyasına bakın.
+
+### Environment Variables
+
+`.env.local` dosyası oluşturun:
+
+```bash
+cp .env.local.example .env.local
 ```
 
-4. "Save" butonuna tıklayın
-5. "Trigger deploy" ile yeniden deploy edin
-
-### Firebase Credentials Nasıl Bulunur?
-
-1. Firebase Console'a gidin: https://console.firebase.google.com
-2. Projenizi seçin
-3. Project Settings (⚙️) > General sekmesine gidin
-4. "Your apps" bölümünde web app'inizi bulun
-5. Firebase SDK snippet > Config seçeneğini seçin
-6. Değerleri kopyalayıp Netlify'a ekleyin
+Firebase credentials'larınızı ekleyin. Credentials'ları bulmak için:
+1. [Firebase Console](https://console.firebase.google.com) → Projenizi seçin
+2. Project Settings ⚙️ → General
+3. Your apps → Config
 
 ## 🛠️ Local Development
 
@@ -48,13 +50,16 @@ cp .env.local.example .env.local
 npm run dev
 ```
 
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
+
 ## 📦 Tech Stack
 
-- **Framework:** Next.js 15
+- **Framework:** Next.js 15 (Static Export)
 - **Language:** TypeScript
 - **Styling:** CSS Modules
 - **Backend:** Firebase (Firestore, Auth)
-- **Deployment:** Netlify
+- **Hosting:** Firebase Hosting
+- **Database:** Cloud Firestore
 
 ## 📝 Features
 
@@ -63,10 +68,49 @@ npm run dev
 - 👥 Müşteri Yönetimi
 - 📊 Admin Dashboard
 - 🎨 Modern UI/UX
+- 📱 Responsive Design
 
-## 🔧 Build Issues?
+## 🔧 Available Scripts
 
-Eğer build sırasında `auth/invalid-api-key` hatası alıyorsanız:
-- Netlify environment variables'larını kontrol edin
-- Firebase credentials'larınızın doğru olduğundan emin olun
-- Netlify'da yeniden deploy edin
+| Script | Açıklama |
+|--------|----------|
+| `npm run dev` | Development server başlatır |
+| `npm run build` | Production build oluşturur |
+| `npm run export` | Static export oluşturur |
+| `npm run deploy` | Firebase Hosting'e deploy eder |
+| `npm run deploy:preview` | Preview channel'a deploy eder |
+
+## 📁 Project Structure
+
+```
+omgarage/
+├── app/                    # Next.js app directory
+│   ├── admin/             # Admin panel pages
+│   │   ├── calendar/      # Takvim sayfası
+│   │   └── customers/     # Müşteri yönetimi
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Ana sayfa
+├── lib/                   # Utilities & configs
+│   ├── firebase.ts        # Firebase initialization
+│   ├── firebase-config.ts # Firebase config
+│   └── types.ts           # TypeScript types
+├── hooks/                 # Custom React hooks
+├── public/                # Static assets
+└── firebase.json          # Firebase Hosting config
+```
+
+## 🔒 Security
+
+- Firestore Security Rules yapılandırılmıştır
+- Environment variables ile güvenli credential yönetimi
+- Client-side authentication
+
+## 🌐 Deployment
+
+Deploy sonrası URL: `https://your-project-id.web.app`
+
+Custom domain eklemek için:
+1. Firebase Console → Hosting
+2. Add custom domain
+3. DNS kayıtlarını güncelleyin
+

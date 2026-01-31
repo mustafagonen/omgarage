@@ -1,11 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    // Disable static optimization for pages that use Firebase
-    // This prevents build-time errors when environment variables are not available
-    experimental: {
-        // Allow dynamic rendering for admin pages
+    // Enable static export for Firebase Hosting
+    output: 'export',
+
+    // Disable image optimization for static export
+    images: {
+        unoptimized: true,
     },
+
+    // Trailing slash for better Firebase Hosting compatibility
+    trailingSlash: true,
+
     // Ensure environment variables are available at runtime
     env: {
         NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
