@@ -5,6 +5,9 @@ export const metadata: Metadata = {
     title: "OMG Garaj - Profesyonel Araç Bakım Hizmetleri",
     description: "Boya koruma, seramik kaplama, pasta cila ve detaylı araç bakım hizmetleri. OMG Garaj ile aracınız her zaman yeni gibi.",
     keywords: ["boya koruma", "seramik kaplama", "pasta cila", "araç bakım", "detailing", "cam filmi"],
+    icons: {
+        icon: '/logo.png',
+    },
 };
 
 export default function RootLayout({
@@ -14,7 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="tr">
-            <body>{children}</body>
+            <body suppressHydrationWarning>{children}</body>
         </html>
     );
 }

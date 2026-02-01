@@ -34,7 +34,7 @@ export default function HomePage() {
                             <span className={styles.navText}>İletişim</span>
                             <span className={styles.navUnderline}></span>
                         </a>
-                        <Link href="/admin" className="btn btn-primary">Yönetim Paneli</Link>
+                        <Link href="/admin" className={`btn btn-primary ${styles.adminBtn}`}>Yönetim Paneli</Link>
                     </nav>
 
                     {/* Enhanced Mobile Menu Button */}

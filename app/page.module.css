@@ -141,6 +141,14 @@
   margin-left: auto;
 }
 
+.adminBtn {
+  padding: 0.5rem 1rem !important; /* Override global btn padding */
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  min-height: unset; /* Ensure no minimum height overrides */
+  color: var(--color-dark) !important; /* Ensure readable text on gold */
+}
+
 /* Enhanced Hamburger Menu */
 .hamburger {
   display: none;
